@@ -66,21 +66,28 @@ const FlashCard = ({ flashcard, onClose, onNext }: FlashCardProps) => {
             </svg>
           </button>
 
-          <div className="flex justify-between items-start mb-6">
-            <h2 className="text-4xl font-bold text-gray-800">{flashcard.word}</h2>
-            <div className="flex gap-4">
-              <button
-                onClick={() => playAudio('uk')}
-                className="flex items-center px-3 py-1 text-sm text-gray-600 hover:text-green-600 bg-gray-100 rounded-full hover:bg-gray-200 transition-colors"
-              >
-                {flashcard.uk_pronunciation}
-              </button>
-              <button
-                onClick={() => playAudio('us')}
-                className="flex items-center px-3 py-1 text-sm text-gray-600 hover:text-green-600 bg-gray-100 rounded-full hover:bg-gray-200 transition-colors"
-              >
-                {flashcard.us_pronunciation}
-              </button>
+          {/* Word and Pronunciation */}
+          <div className="mb-6">
+            <div className="flex items-center gap-4">
+              <h2 className="text-4xl font-bold text-gray-800">{flashcard.word}</h2>
+              <div className="flex gap-3">
+                <button
+                  onClick={() => playAudio('uk')}
+                  className="flex items-center px-4 py-2 text-base font-medium text-gray-600 hover:text-green-600 bg-gray-100 rounded-full hover:bg-gray-200 transition-colors"
+                  title={t('flashcard.pronunciation.uk')}
+                >
+                  <span className="mr-2 text-lg">🇬🇧</span>
+                  <span className="font-mono">{flashcard.uk_pronunciation}</span>
+                </button>
+                <button
+                  onClick={() => playAudio('us')}
+                  className="flex items-center px-4 py-2 text-base font-medium text-gray-600 hover:text-green-600 bg-gray-100 rounded-full hover:bg-gray-200 transition-colors"
+                  title={t('flashcard.pronunciation.us')}
+                >
+                  <span className="mr-2 text-lg">🇺🇸</span>
+                  <span className="font-mono">{flashcard.us_pronunciation}</span>
+                </button>
+              </div>
             </div>
           </div>
 
