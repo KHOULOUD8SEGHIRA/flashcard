@@ -10,16 +10,23 @@
  * - Internationalization support
  */
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import FlashCard from './components/FlashCard';
 import { LanguageProvider, useLanguage } from './hooks/useLanguage';
 import LanguageSwitcher from './components/LanguageSwitcher';
+import { initGA, event } from './utils/analytics';
 
-const AppWrapper = () => (
-  <LanguageProvider>
-    <App />
-  </LanguageProvider>
-);
+const AppWrapper = () => {
+  useEffect(() => {
+    initGA();
+  }, []);
+
+  return (
+    <LanguageProvider>
+      <App />
+    </LanguageProvider>
+  );
+};
 
 const App = () => {
   const AppContent = () => {
@@ -56,6 +63,12 @@ const App = () => {
 
         const data = await response.json();
         setFlashcard(data.data.outputs);
+        
+        // Track flashcard generation
+        event('generate_flashcard', {
+          native_language: nativeLanguage,
+          target_language: targetLanguage
+        });
       } catch (error) {
         console.error('Error fetching flashcard:', error);
       } finally {

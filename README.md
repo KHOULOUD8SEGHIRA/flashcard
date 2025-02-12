@@ -16,7 +16,6 @@
 3. Select `dify-config.yml` and deploy
 4. Update environment variables in `.env`:
    ```
-   ```
    VITE_DIFY_API_KEY=your_dify_api_key
    VITE_DIFY_API_URL=your_workflow_endpoint
    ```
@@ -39,6 +38,12 @@ We welcome contributions in these areas:
 npm install
 npm run dev
 ```
+
+## 📝 Todo
+- Render HTML tags (e.g. `<b>`) in flashcards for better text emphasis
+- Optimize language support and add more language options
+- Add more interactive learning features
+- Enhance error handling and user feedback
 
 ## 📄 License
 MIT License - see [LICENSE](LICENSE) for details
