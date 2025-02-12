@@ -11,14 +11,11 @@
 - Related vocabulary suggestions
 
 ## 📦 Self-Hosted Backend on Dify
-1. **Prepare DSL File**:  
-   ```bash
-   cp dify_backend.yml dify-config.yml
+1. Login to your [Dify](https://dify.ai) dashboard
+2. Create new workflow → "Import from YAML"
+3. Select `dify-config.yml` and deploy
+4. Update environment variables in `.env`:
    ```
-2. Login to your [Dify](https://dify.ai) dashboard
-3. Create new workflow → "Import from YAML"
-4. Select `dify-config.yml` and deploy
-5. Update environment variables in `.env`:
    ```
    VITE_DIFY_API_KEY=your_dify_api_key
    VITE_DIFY_API_URL=your_workflow_endpoint
