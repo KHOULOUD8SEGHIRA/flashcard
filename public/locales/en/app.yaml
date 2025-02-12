@@ -1,0 +1,22 @@
+header:
+  title1: "Duolingo"
+  title2: "Alternative Flashcards"
+
+languageSelector:
+  native: "My native language is:"
+  target: "I want to learn:"
+  comingSoon: "Coming soon"
+
+button:
+  drawCard: "Draw a Card"
+  drawing: "Drawing..."
+  nextWord: "Next Word"
+
+flashcard:
+  exampleSentence: "Example Sentence:"
+  memoryTip: "Memory Tip"
+  relatedWords: "Related Words:"
+  synonyms: "Synonyms:"
+  pronunciation:
+    uk: "UK Pronunciation"
+    us: "US Pronunciation"

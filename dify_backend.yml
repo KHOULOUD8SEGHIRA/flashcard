@@ -1,0 +1,482 @@
+app:
+  description: ''
+  icon: 🦉
+  icon_background: '#E4FBCC'
+  mode: workflow
+  name: Duoligo alternative
+  use_icon_as_answer_icon: false
+kind: app
+version: 0.1.5
+workflow:
+  conversation_variables: []
+  environment_variables: []
+  features:
+    file_upload:
+      allowed_file_extensions:
+      - .JPG
+      - .JPEG
+      - .PNG
+      - .GIF
+      - .WEBP
+      - .SVG
+      allowed_file_types:
+      - image
+      allowed_file_upload_methods:
+      - local_file
+      - remote_url
+      enabled: false
+      fileUploadConfig:
+        audio_file_size_limit: 50
+        batch_count_limit: 5
+        file_size_limit: 15
+        image_file_size_limit: 10
+        video_file_size_limit: 100
+        workflow_file_upload_limit: 10
+      image:
+        enabled: false
+        number_limits: 3
+        transfer_methods:
+        - local_file
+        - remote_url
+      number_limits: 3
+    opening_statement: ''
+    retriever_resource:
+      enabled: true
+    sensitive_word_avoidance:
+      enabled: false
+    speech_to_text:
+      enabled: false
+    suggested_questions: []
+    suggested_questions_after_answer:
+      enabled: false
+    text_to_speech:
+      enabled: false
+      language: ''
+      voice: ''
+  graph:
+    edges:
+    - data:
+        isInIteration: false
+        sourceType: start
+        targetType: http-request
+      id: 1739346582116-source-1739346728603-target
+      source: '1739346582116'
+      sourceHandle: source
+      target: '1739346728603'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        sourceType: http-request
+        targetType: code
+      id: 1739346728603-source-1739357556789-target
+      source: '1739346728603'
+      sourceHandle: source
+      target: '1739357556789'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        sourceType: code
+        targetType: llm
+      id: 1739357556789-source-1739358483484-target
+      source: '1739357556789'
+      sourceHandle: source
+      target: '1739358483484'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        sourceType: llm
+        targetType: parameter-extractor
+      id: 1739358483484-source-1739359017635-target
+      source: '1739358483484'
+      sourceHandle: source
+      target: '1739359017635'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        sourceType: parameter-extractor
+        targetType: end
+      id: 1739359017635-source-1739350974049-target
+      source: '1739359017635'
+      sourceHandle: source
+      target: '1739350974049'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    nodes:
+    - data:
+        desc: ''
+        selected: false
+        title: Start
+        type: start
+        variables:
+        - label: What's your spoken language?
+          max_length: 48
+          options:
+          - Japanese
+          - Chinese
+          required: true
+          type: select
+          variable: language
+      height: 90
+      id: '1739346582116'
+      position:
+        x: 80
+        y: 282
+      positionAbsolute:
+        x: 80
+        y: 282
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        authorization:
+          config: null
+          type: no-auth
+        body:
+          data: []
+          type: none
+        desc: ''
+        headers: ''
+        method: get
+        params: ''
+        retry_config:
+          max_retries: 3
+          retry_enabled: true
+          retry_interval: 100
+        selected: false
+        timeout:
+          max_connect_timeout: 0
+          max_read_timeout: 0
+          max_write_timeout: 0
+        title: HTTP Request
+        type: http-request
+        url: https://v2.xxapi.cn/api/randomenglishwords
+        variables: []
+      height: 136
+      id: '1739346728603'
+      position:
+        x: 448
+        y: 282
+      positionAbsolute:
+        x: 448
+        y: 282
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        desc: ''
+        outputs:
+        - value_selector:
+          - '1739357556789'
+          - word
+          variable: word
+        - value_selector:
+          - '1739357556789'
+          - uk_pronunciation
+          variable: uk_pronunciation
+        - value_selector:
+          - '1739357556789'
+          - us_pronunciation
+          variable: us_pronunciation
+        - value_selector:
+          - '1739359017635'
+          - related_words
+          variable: related_words
+        - value_selector:
+          - '1739359017635'
+          - exampleSentence
+          variable: exampleSentence
+        - value_selector:
+          - '1739359017635'
+          - exampleTranslation
+          variable: exampleTranslation
+        - value_selector:
+          - '1739359017635'
+          - translation
+          variable: translation
+        - value_selector:
+          - '1739357556789'
+          - part_of_speech
+          variable: part_of_speech
+        - value_selector:
+          - '1739359017635'
+          - related_words
+          variable: related_words
+        - value_selector:
+          - '1739359017635'
+          - synonyms
+          variable: synonyms
+        - value_selector:
+          - '1739357556789'
+          - uk_speech
+          variable: uk_speech
+        - value_selector:
+          - '1739357556789'
+          - us_speech
+          variable: us_speech
+        - value_selector:
+          - '1739359017635'
+          - mnemonic
+          variable: mnemonic
+        selected: false
+        title: End
+        type: end
+      height: 402
+      id: '1739350974049'
+      position:
+        x: 1688.305230547372
+        y: 282
+      positionAbsolute:
+        x: 1688.305230547372
+        y: 282
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        code: "import json\nfrom typing import Dict\n\ndef main(body: str) -> Dict[str,\
+          \ str]:\n    \"\"\"\n    Extract word-related information from the input\
+          \ JSON string.\n    \n    Args:\n        body (str): JSON string containing\
+          \ word information\n        \n    Returns:\n        dict: Dictionary containing\
+          \ extracted word information as strings\n    \"\"\"\n    # Parse JSON string\n\
+          \    try:\n        data = json.loads(body)\n        word_data = data['data']\n\
+          \        \n        # Initialize variables with default empty strings\n \
+          \       translations = \"\"\n        uk_phone = word_data.get('ukphone',\
+          \ '')\n        us_phone = word_data.get('usphone', '')\n        uk_speech\
+          \ = word_data.get('ukspeech', '')  # 新增英式发音音频链接\n        us_speech = word_data.get('usspeech',\
+          \ '')  # 新增美式发音音频链接\n        word = word_data.get('word', '')\n        \n\
+          \        # Extract part of speech (词性)\n        pos = \"\"\n        if word_data.get('relWords'):\n\
+          \            pos_list = []\n            for rel_word in word_data['relWords']:\n\
+          \                if rel_word.get('Pos'):\n                    pos_list.append(rel_word['Pos'])\n\
+          \            pos = '; '.join(pos_list)\n            \n        # Extract\
+          \ translations\n        if word_data.get('translations'):\n            translations\
+          \ = '; '.join(\n                f\"{item['pos']}: {item['tran_cn']}\"\n\
+          \                for item in word_data['translations']\n            )\n\
+          \            \n        # Extract related words if available\n        rel_words\
+          \ = \"\"\n        if word_data.get('relWords'):\n            rel_words_list\
+          \ = []\n            for rel_word in word_data['relWords']:\n           \
+          \     if rel_word.get('Hwds'):\n                    for hwd in rel_word['Hwds']:\n\
+          \                        if hwd.get('hwd') and hwd.get('tran'):\n      \
+          \                      rel_words_list.append(f\"{hwd['hwd']}: {hwd['tran']}\"\
+          )\n            rel_words = '; '.join(rel_words_list)\n            \n   \
+          \     # Extract synonyms if available\n        synonyms = \"\"\n       \
+          \ if word_data.get('synonyms'):\n            syn_list = []\n           \
+          \ for syn in word_data['synonyms']:\n                if syn.get('Hwds'):\n\
+          \                    words = [hwd['word'] for hwd in syn['Hwds'] if hwd.get('word')]\n\
+          \                    if words and syn.get('tran'):\n                   \
+          \     syn_list.append(f\"{', '.join(words)}: {syn['tran']}\")\n        \
+          \    synonyms = '; '.join(syn_list)\n        \n        return {\n      \
+          \      \"word\": word,\n            \"part_of_speech\": pos,\n         \
+          \   \"uk_pronunciation\": uk_phone,\n            \"us_pronunciation\": us_phone,\n\
+          \            \"uk_speech\": uk_speech,      # 新增字段\n            \"us_speech\"\
+          : us_speech,      # 新增字段\n            \"translations\": translations,\n\
+          \            \"related_words\": rel_words,\n            \"synonyms\": synonyms\n\
+          \        }\n        \n    except json.JSONDecodeError:\n        return {\n\
+          \            \"error\": \"Invalid JSON format\"\n        }\n    except KeyError\
+          \ as e:\n        return {\n            \"error\": f\"Missing required key:\
+          \ {str(e)}\"\n        }"
+        code_language: python3
+        desc: ''
+        outputs:
+          part_of_speech:
+            children: null
+            type: string
+          related_words:
+            children: null
+            type: string
+          synonyms:
+            children: null
+            type: string
+          translations:
+            children: null
+            type: string
+          uk_pronunciation:
+            children: null
+            type: string
+          uk_speech:
+            children: null
+            type: string
+          us_pronunciation:
+            children: null
+            type: string
+          us_speech:
+            children: null
+            type: string
+          word:
+            children: null
+            type: string
+        selected: false
+        title: get json
+        type: code
+        variables:
+        - value_selector:
+          - '1739346728603'
+          - body
+          variable: body
+      height: 54
+      id: '1739357556789'
+      position:
+        x: 752
+        y: 282
+      positionAbsolute:
+        x: 752
+        y: 282
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        context:
+          enabled: false
+          variable_selector: []
+        desc: ''
+        model:
+          completion_params:
+            temperature: 0.7
+          mode: chat
+          name: deepseek-ai/DeepSeek-R1-Distill-Llama-8B
+          provider: openai_api_compatible
+        prompt_template:
+        - id: 63bbcaf1-7376-46c2-af79-b7e6f9dcdfda
+          role: system
+          text: "# System Prompt: 智能多语言单词闪卡生成器\n\n## 角色\n你是一个智能多语言单词闪卡生成器，能够将中文单词数据转换为用户指定语言的\
+            \ XML 格式闪卡内容。\n\n## 任务\n当用户提供「单词」和「母语」时：\n1. 调用中文释义 API 获取数据。\n2. 将所有内容翻译成用户的母语。\n\
+            3. 生成 XML 格式的闪卡内容。\n\n## 输出格式规范\nLLM 必须严格按照以下 XML 格式输出：\n```xml\n<flashcard>\n\
+            \  <title>Word Flashcard</title>\n  <word>{目标单词}</word>\n  <explanation>{母语释义}</explanation>\n\
+            \  \n  <mnemonic>\n    <method>记忆方法</method>\n    <tip>{包含谐音/联想的记忆短句}</tip>\n\
+            \  </mnemonic>\n\n  <example>\n    <english_sentence><![CDATA[例句需包含<b>目标单词</b>]]></english_sentence>\n\
+            \    <translation>{母语例句翻译}</translation>\n  </example>\n\n  <related_words>\n\
+            \    {英文相关词1}:{母语翻译1};{英文相关词2}:{母语翻译2}\n  </related_words>\n\n  <synonyms>\n\
+            \    {英文同义词1}:{母语解释1};{英文同义词2}:{母语解释2}\n  </synonyms>\n</flashcard>\n\
+            ```\n\n## 规则\n1. **语言隔离**  \n   - 当用户母语≠中文时，禁止出现任何汉字或拼音。\n   - 所有内容必须完全翻译为目标语言。\n\
+            \n2. **记忆短句要求**  \n   - 必须包含谐音或联想要素。\n   - 必须同时解释单词的含义。\n\n3. **例句要求**\
+            \  \n   - 例句必须包含 `<b>` 标签标记的目标单词。\n   - 优先选择高频实用例句。\n\n4. **相关词汇与同义词**\
+            \  \n   - 相关词汇优先选择同词根派生词。\n   - 使用分号分隔多个词条，格式为：`英文:目标语言翻译`。\n\n## 示例输出1\n\
+            以下是用户母语为日语的示例输出：\n```xml\n<flashcard>\n  <title>Word Flashcard</title>\n\
+            \  <word>Guzzle</word>\n  <explanation>がぶがぶ飲む</explanation>\n  \n  <mnemonic>\n\
+            \    <method>谐音记忆</method>\n    <tip>\"ガッツリ飲む「ガズル」！\" (拟声词\"ガッツリ\"表示豪饮)</tip>\n\
+            \  </mnemonic>\n\n  <example>\n    <english_sentence><![CDATA[The thirsty\
+            \ man <b>guzzled</b> two liters of water at once]]></english_sentence>\n\
+            \    <translation>喉の乾いた男性は一気に2リットルの水をがぶ飲みした</translation>\n  </example>\n\
+            \n  <related_words>\n    Guzzler:大食いの人;Guzzle-down:一気飲みする\n  </related_words>\n\
+            \n  <synonyms>\n    Quaff:一気飲みする;Swig:がぶ飲みする\n  </synonyms>\n</flashcard>\n\
+            ```\n\n\n## 输出示例2\n```xml\n<flashcard>\n  <title>Word Flashcard</title>\n\
+            \  <word>Sustainability</word>\n  <explanation>環境への負荷を抑えつつ発展を続ける能力</explanation>\n\
+            \  \n  <mnemonic>\n    <method>联想记忆</method>\n    <tip>\"サステイン（持続）＋アビリティ（能力）＝持続可能性\"\
+            </tip>\n  </mnemonic>\n\n  <example>\n    <english_sentence><![CDATA[The\
+            \ development of <b>sustainability</b>-focused packaging is urgent]]></english_sentence>\n\
+            \    <translation>持続可能性を考慮した包装材の開発が急務だ</translation>\n  </example>\n\n\
+            \  <related_words>\n    Sustainable:長期間維持可能な;Sustainably:持続可能な方法で\n  </related_words>\n\
+            \n  <synonyms>\n    Eco-friendly:環境に優しい;Green-tech:環境配慮型技術\n  </synonyms>\n\
+            </flashcard>\n```"
+        - id: 8ab05b1f-2825-471a-ade2-32ccafec2b72
+          role: user
+          text: '单词：{{#1739357556789.word#}}
+
+            用户的母语：{{#1739346582116.language#}}
+
+            '
+        selected: false
+        title: LLM
+        type: llm
+        variables: []
+        vision:
+          enabled: false
+      height: 98
+      id: '1739358483484'
+      position:
+        x: 1056
+        y: 282
+      positionAbsolute:
+        x: 1056
+        y: 282
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        desc: ''
+        instruction: '你将从英语学习词典中提取内容
+
+          根据描述中的XML标签提取XML标签内的内容，但不包含标签本身
+
+          输入示例：<标题>正文</标题>
+
+          提取示例：正文
+
+          用户的母语：{{#1739346582116.language#}}
+
+          你需要保留英语的内容，同时确保用户的母语翻译准确'
+        model:
+          completion_params:
+            temperature: 0.7
+          mode: chat
+          name: deepseek-ai/DeepSeek-V2.5
+          provider: siliconflow
+        parameters:
+        - description: ' <english_sentence>'
+          name: exampleSentence
+          required: false
+          type: string
+        - description: <translation>
+          name: exampleTranslation
+          required: false
+          type: string
+        - description: <explanation>
+          name: translation
+          required: false
+          type: string
+        - description: <synonyms>
+          name: synonyms
+          required: false
+          type: string
+        - description: <related_words>
+          name: related_words
+          required: false
+          type: string
+        - description: <tip>
+          name: mnemonic
+          required: false
+          type: string
+        query:
+        - '1739358483484'
+        - text
+        reasoning_mode: prompt
+        selected: true
+        title: Parameter Extractor
+        type: parameter-extractor
+        variables: []
+        vision:
+          enabled: false
+      height: 98
+      id: '1739359017635'
+      position:
+        x: 1360
+        y: 282
+      positionAbsolute:
+        x: 1360
+        y: 282
+      selected: true
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    viewport:
+      x: -592.7118610768857
+      y: 256.98771269733385
+      zoom: 1.0988542175768796

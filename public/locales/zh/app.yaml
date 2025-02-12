@@ -1,0 +1,22 @@
+header:
+  title1: "多邻国"
+  title2: "替代学习卡"
+
+languageSelector:
+  native: "我的母语是："
+  target: "我要学习："
+  comingSoon: "即将推出"
+
+button:
+  drawCard: "抽取卡片"
+  drawing: "抽取中..."
+  nextWord: "下一个单词"
+
+flashcard:
+  exampleSentence: "例句："
+  memoryTip: "记忆技巧"
+  relatedWords: "相关词汇："
+  synonyms: "近义词："
+  pronunciation:
+    uk: "英式发音"
+    us: "美式发音"
