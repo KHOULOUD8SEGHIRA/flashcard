@@ -1,0 +1,16 @@
+languages:
+  en:
+    code: "en"
+    name: "English"
+    nativeName: "English"
+    flag: "🇺🇸"
+  zh:
+    code: "zh"
+    name: "Chinese"
+    nativeName: "中文"
+    flag: "🇨🇳"
+  ja:
+    code: "ja"
+    name: "Japanese"
+    nativeName: "日本語"
+    flag: "🇯🇵"

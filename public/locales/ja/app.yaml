@@ -1,0 +1,22 @@
+header:
+  title1: "🦉LinguaCards"
+  title2: "デュオリンゴの代替フラッシュカード"
+
+languageSelector:
+  native: "母国語："
+  target: "学習したい言語："
+  comingSoon: "近日公開"
+
+button:
+  drawCard: "カードを引く"
+  drawing: "読み込み中..."
+  nextWord: "次の単語"
+
+flashcard:
+  exampleSentence: "例文："
+  memoryTip: "記憶のコツ"
+  relatedWords: "関連語："
+  synonyms: "類義語："
+  pronunciation:
+    uk: "英"
+    us: "米"

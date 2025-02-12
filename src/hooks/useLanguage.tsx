@@ -1,62 +1,96 @@
 /**
  * Language context and hook for internationalization support.
  * Provides language switching functionality and translation lookup.
- * 
- * Features:
- * - Dynamic YAML translation file loading
- * - Language context provider
- * - Translation lookup function
- * - TypeScript type safety
- * 
- * Usage:
- * 1. Wrap your app with LanguageProvider
- * 2. Use useLanguage hook to access translations
- * 3. Call t('key.path') to get translated text
  */
 
 import { useState, createContext, useContext, useEffect } from 'react';
 import yaml from 'js-yaml';
 
-type Language = 'en' | 'zh';
-type Translations = Record<string, any>;
+interface Language {
+  code: string;
+  name: string;
+  nativeName: string;
+  flag: string;
+}
 
-const LanguageContext = createContext<{
-  language: Language;
-  setLanguage: (lang: Language) => void;
+interface LanguageList {
+  languages: {
+    [key: string]: Language;
+  };
+}
+
+interface Translations {
+  [key: string]: any;
+}
+
+interface LanguageContextType {
+  currentLanguage: string;
+  setCurrentLanguage: (lang: string) => void;
   t: (key: string) => string;
-}>(null!);
+  languages: {
+    [key: string]: Language;
+  };
+}
 
-export const LanguageProvider = ({ children }: { children: React.ReactNode }) => {
-  const [language, setLanguage] = useState<Language>('en');
+const LanguageContext = createContext<LanguageContextType | undefined>(undefined);
+
+export function LanguageProvider({ children }: { children: React.ReactNode }) {
+  const [currentLanguage, setCurrentLanguage] = useState('en');
   const [translations, setTranslations] = useState<Translations>({});
+  const [languages, setLanguages] = useState<{ [key: string]: Language }>({});
 
   useEffect(() => {
-    const loadTranslations = async () => {
-      try {
-        const response = await fetch(`/locales/${language}/app.yaml`);
-        const text = await response.text();
-        setTranslations(yaml.load(text) as Translations);
-      } catch (error) {
-        console.error('Error loading translations:', error);
-      }
-    };
+    // Load language list
+    fetch('/locales/languages.yaml')
+      .then((response) => response.text())
+      .then((text) => {
+        const data = yaml.load(text) as LanguageList;
+        setLanguages(data.languages);
+      })
+      .catch(console.error);
+  }, []);
 
-    loadTranslations();
-  }, [language]);
+  useEffect(() => {
+    // Load translations for current language
+    fetch(`/locales/${currentLanguage}/app.yaml`)
+      .then((response) => response.text())
+      .then((text) => {
+        const data = yaml.load(text) as Translations;
+        setTranslations(data);
+      })
+      .catch(console.error);
+  }, [currentLanguage]);
 
   const t = (key: string): string => {
-    return key.split('.').reduce((obj, keyPart) => 
-      (obj && obj[keyPart] !== undefined) ? obj[keyPart] : key,
-    translations);
+    const keys = key.split('.');
+    let value: any = translations;
+    
+    for (const k of keys) {
+      if (value === undefined) return key;
+      value = value[k];
+    }
+    
+    return value || key;
   };
 
   return (
-    <LanguageContext.Provider value={{ language, setLanguage, t }}>
+    <LanguageContext.Provider
+      value={{
+        currentLanguage,
+        setCurrentLanguage,
+        t,
+        languages,
+      }}
+    >
       {children}
     </LanguageContext.Provider>
   );
-};
+}
 
-export const useLanguage = () => {
-  return useContext(LanguageContext);
-};
+export function useLanguage() {
+  const context = useContext(LanguageContext);
+  if (context === undefined) {
+    throw new Error('useLanguage must be used within a LanguageProvider');
+  }
+  return context;
+}

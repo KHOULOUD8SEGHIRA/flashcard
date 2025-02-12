@@ -13,13 +13,7 @@ interface LanguageSwitcherProps {
 
 export default function LanguageSwitcher({ className = '' }: LanguageSwitcherProps) {
   const [isOpen, setIsOpen] = useState(false);
-  const { currentLanguage, setCurrentLanguage } = useLanguage();
-
-  const languages = [
-    { code: 'en', name: 'English' },
-    { code: 'zh', name: '中文' },
-    // Add more languages here as they become available
-  ];
+  const { currentLanguage, setCurrentLanguage, languages } = useLanguage();
 
   return (
     <>
@@ -80,20 +74,21 @@ export default function LanguageSwitcher({ className = '' }: LanguageSwitcherPro
               </div>
 
               <div className="grid grid-cols-1 gap-2">
-                {languages.map((lang) => (
+                {Object.values(languages).map((lang) => (
                   <button
                     key={lang.code}
                     onClick={() => {
                       setCurrentLanguage(lang.code);
                       setIsOpen(false);
                     }}
-                    className={`px-4 py-3 rounded-xl text-lg transition-all ${
+                    className={`px-4 py-3 rounded-xl text-lg transition-all flex items-center justify-center gap-2 ${
                       currentLanguage === lang.code
                         ? 'bg-green-500 text-white shadow-md'
                         : 'bg-white border-2 border-gray-200 text-gray-600 hover:border-green-500 hover:text-green-500'
                     }`}
                   >
-                    {lang.name}
+                    <span>{lang.flag}</span>
+                    <span>{lang.nativeName}</span>
                   </button>
                 ))}
               </div>
