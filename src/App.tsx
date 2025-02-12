@@ -220,6 +220,17 @@ const App = () => {
                 src="https://img.shields.io/badge/powered_by-dify-00A98F?logo=github&style=for-the-badge"
               />
             </a>
+            <a
+              href="https://www.buymeacoffee.com/stvlynn"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:opacity-80 transition-opacity"
+            >
+              <img
+                alt="Buy Me A Coffee"
+                src="https://img.shields.io/badge/buy_me_a_coffee-support-FFDD00?style=for-the-badge&logo=buymeacoffee&logoColor=black"
+              />
+            </a>
           </div>
         </div>
       </div>

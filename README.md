@@ -2,6 +2,8 @@
 **Learn Languages Smarter, Not Harder**  
 ![App Screenshot](public/images/owl.jpg)
 
+[!["Buy Me A Coffee"](https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png)](https://www.buymeacoffee.com/stvlynn)
+
 ## 🚀 Features
 - Dynamic flashcard system powered by AI
 - Multi-language interface support (English/中文)
@@ -44,6 +46,10 @@ npm run dev
 - Optimize language support and add more language options
 - Add more interactive learning features
 - Enhance error handling and user feedback
+
+## ⭐ Star History
+
+[![Star History Chart](https://api.star-history.com/svg?repos=stvlynn/flashcard&type=Date)](https://star-history.com/#stvlynn/flashcard&Date)
 
 ## 📄 License
 MIT License - see [LICENSE](LICENSE) for details
