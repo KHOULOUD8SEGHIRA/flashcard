@@ -51,91 +51,98 @@ const FlashCard = ({ flashcard, onClose, onNext }: FlashCardProps) => {
       ></div>
 
       {/* Modal */}
-      <div className="flex min-h-full items-center justify-center p-4">
-        <div 
-          className="w-full max-w-3xl bg-white rounded-2xl shadow-xl p-8 relative z-50 transform transition-all duration-500 animate-modal-appear"
-          onClick={(e) => e.stopPropagation()}
-        >
+      <div className="relative min-h-screen flex items-center justify-center p-4">
+        <div className="relative bg-white rounded-2xl shadow-xl w-full max-w-3xl mx-auto">
           {/* Close button */}
-          <button 
+          <button
             onClick={onClose}
-            className="absolute top-4 right-4 text-gray-400 hover:text-gray-600 transition-colors"
+            className="absolute right-2 top-2 md:right-4 md:top-4 p-2 text-gray-400 hover:text-gray-600 transition-colors"
           >
-            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg className="w-5 h-5 md:w-6 md:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
             </svg>
           </button>
 
-          {/* Word and Pronunciation */}
-          <div className="mb-6">
-            <div className="flex items-center gap-4">
-              <h2 className="text-4xl font-bold text-gray-800">{flashcard.word}</h2>
-              <div className="flex gap-3">
+          {/* Card content */}
+          <div className="p-4 md:p-8">
+            {/* Word and Translation */}
+            <div className="text-center mb-6 md:mb-8">
+              <h2 className="text-2xl md:text-4xl font-bold text-gray-900 mb-2">
+                {flashcard.word}
+              </h2>
+              <p className="text-lg md:text-xl text-gray-600">
+                {flashcard.translation}
+              </p>
+            </div>
+
+            {/* Pronunciation */}
+            <div className="grid grid-cols-2 gap-4 mb-6">
+              {/* UK Pronunciation */}
+              <div className="text-center">
                 <button
                   onClick={() => playAudio('uk')}
-                  className="flex items-center px-4 py-2 text-base font-medium text-gray-600 hover:text-green-600 bg-gray-100 rounded-full hover:bg-gray-200 transition-colors"
-                  title={t('flashcard.pronunciation.uk')}
+                  className="w-full p-3 md:p-4 rounded-lg bg-gray-50 hover:bg-gray-100 transition-colors flex items-center justify-center gap-2"
                 >
-                  <span className="mr-2 text-lg">🇬🇧</span>
-                  <span className="font-mono">{flashcard.uk_pronunciation}</span>
+                  <span className="text-sm md:text-base font-medium">🇬🇧 {flashcard.uk_pronunciation}</span>
+                  <svg className="w-4 h-4 md:w-5 md:h-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" />
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
                 </button>
+              </div>
+
+              {/* US Pronunciation */}
+              <div className="text-center">
                 <button
                   onClick={() => playAudio('us')}
-                  className="flex items-center px-4 py-2 text-base font-medium text-gray-600 hover:text-green-600 bg-gray-100 rounded-full hover:bg-gray-200 transition-colors"
-                  title={t('flashcard.pronunciation.us')}
+                  className="w-full p-3 md:p-4 rounded-lg bg-gray-50 hover:bg-gray-100 transition-colors flex items-center justify-center gap-2"
                 >
-                  <span className="mr-2 text-lg">🇺🇸</span>
-                  <span className="font-mono">{flashcard.us_pronunciation}</span>
+                  <span className="text-sm md:text-base font-medium">🇺🇸 {flashcard.us_pronunciation}</span>
+                  <svg className="w-4 h-4 md:w-5 md:h-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" />
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
                 </button>
               </div>
             </div>
-          </div>
 
-          <div className="space-y-6">
-            <div className="bg-green-50 rounded-xl p-4">
-              <p className="text-xl font-medium text-green-800">{flashcard.translation}</p>
-              <p className="text-sm text-green-600 mt-1">{flashcard.part_of_speech}</p>
+            {/* Example Sentence */}
+            <div className="mb-6 space-y-2">
+              <h3 className="text-base md:text-lg font-medium text-gray-700">{t('flashcard.example')}</h3>
+              <p className="text-sm md:text-base text-gray-900">{flashcard.exampleSentence}</p>
+              <p className="text-sm md:text-base text-gray-600">{flashcard.exampleTranslation}</p>
             </div>
 
-            <div className="bg-gray-50 rounded-xl p-4">
-              <h3 className="font-medium text-gray-700 mb-2">{t('flashcard.exampleSentence')}</h3>
-              <p className="text-lg text-gray-800">{flashcard.exampleSentence}</p>
-              <p className="text-gray-600 mt-2">{flashcard.exampleTranslation}</p>
+            {/* Memory Tips */}
+            <div className="mb-6 space-y-2">
+              <h3 className="text-base md:text-lg font-medium text-gray-700">{t('flashcard.memoryTip')}</h3>
+              <p className="text-sm md:text-base text-gray-900">{flashcard.mnemonic}</p>
             </div>
 
-            <div className="bg-yellow-50 rounded-xl p-4 border-l-4 border-yellow-400">
-              <h3 className="font-medium text-yellow-800 mb-2 flex items-center">
-                <span className="mr-2">💡</span>
-                {t('flashcard.memoryTip')}
-              </h3>
-              <p className="text-yellow-900 italic">{flashcard.mnemonic}</p>
-            </div>
-
-            <div className="grid grid-cols-2 gap-4">
-              <div className="bg-gray-50 rounded-xl p-4">
-                <h3 className="font-medium text-gray-700 mb-2">{t('flashcard.relatedWords')}</h3>
-                <p className="text-gray-600">{flashcard.related_words}</p>
+            {/* Related Words and Synonyms */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+              <div className="space-y-2">
+                <h3 className="text-base md:text-lg font-medium text-gray-700">{t('flashcard.relatedWords')}</h3>
+                <p className="text-sm md:text-base text-gray-900">{flashcard.related_words}</p>
               </div>
-              <div className="bg-gray-50 rounded-xl p-4">
-                <h3 className="font-medium text-gray-700 mb-2">{t('flashcard.synonyms')}</h3>
-                <p className="text-gray-600">{flashcard.synonyms}</p>
+              <div className="space-y-2">
+                <h3 className="text-base md:text-lg font-medium text-gray-700">{t('flashcard.synonyms')}</h3>
+                <p className="text-sm md:text-base text-gray-900">{flashcard.synonyms}</p>
               </div>
             </div>
-          </div>
 
-          {/* Next Word Button */}
-          <div className="mt-8 flex justify-center">
-            <button
-              onClick={onNext}
-              className="group relative inline-flex items-center justify-center px-8 py-4 text-lg font-medium text-white bg-green-500 rounded-full overflow-hidden shadow-lg hover:bg-green-600 transition-colors"
-            >
-              <span className="relative z-10 flex items-center">
+            {/* Next Card Button */}
+            <div className="flex justify-center pt-4">
+              <button
+                onClick={onNext}
+                className="px-6 py-3 text-sm md:text-base font-medium text-white bg-green-500 rounded-full hover:bg-green-600 transition-colors flex items-center gap-2"
+              >
                 {t('button.nextWord')}
-                <svg className="ml-2 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                <svg className="w-4 h-4 md:w-5 md:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                 </svg>
-              </span>
-            </button>
+              </button>
+            </div>
           </div>
         </div>
       </div>
